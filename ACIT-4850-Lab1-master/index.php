@@ -14,14 +14,22 @@ and open the template in the editor.
             $hoursworked = 10;
             $rate = 12;
             $total = $hoursworked * $rate;
-
+            
             $name = 'Jim';
             $what = 'geek';
             $level = 10;
+            
+            //overtime
+            if ($hoursworked > 40){
+                $total = $hoursworked * $rate * 1.5;
+            } else {
+                $total = $hoursworked * $rate;
+            }
+            
             echo 'Hi, my name is '.$name,'. and I am a level '.$level.'
             '.$what;
             echo '<br/>';
-            echo 'you owe me $' .$total;
+            echo ($total > 0) ? 'You owe me $' .$total : "you're welcome";
             
         ?>
     </body>
