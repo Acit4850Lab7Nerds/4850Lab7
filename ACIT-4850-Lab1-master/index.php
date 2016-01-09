@@ -11,9 +11,9 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-            $hoursworked = 10;
-            $rate = 12;
-            $total = $hoursworked * $rate;
+            $hoursworked = 10;
+            $rate = 12;
+            $total = $hoursworked * $rate;
 
             $name = 'Jim';
             $what = 'geek';
