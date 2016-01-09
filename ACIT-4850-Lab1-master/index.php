@@ -11,7 +11,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-            $hoursworked = 10;
+            $hoursworked = $_GET['hours'];
             $rate = 12;
             $total = $hoursworked * $rate;
             
