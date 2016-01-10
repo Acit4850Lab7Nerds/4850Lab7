@@ -170,9 +170,9 @@ and open the template in the editor.
         // put your code here
         $game = new Game($squares);
         if ($game->winner('x')) {
-            echo 'Computer wins ohhhhh noes';
+            echo 'I win clap clap clap';
         } else if ($game->winner('o')) {
-            echo 'I win. clap clap clap';
+            echo 'Computer wins ohhhhh noes';
         } else {
             $game->next();
             echo 'Whats a winner.';
