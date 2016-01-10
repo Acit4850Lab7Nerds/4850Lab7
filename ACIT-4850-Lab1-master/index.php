@@ -12,6 +12,7 @@ and open the template in the editor.
     <body>
         
         <?php
+        //nerd.
             /*$hoursworked = $_GET['hours'];
             $rate = 12;
             $total = $hoursworked * $rate;
@@ -158,64 +159,110 @@ and open the template in the editor.
             else if (winner('o', $squares)) {echo 'I win.';}
             else {echo 'No winner yet.';}*/
         ?>
-        
         <?php
-            //Java TTT
-            $game = new Game($squares);
-            if($game->winner('x')){
-                echo 'Computer wins aahahhahahaha';
-            } else if ($game->winner('o')){
-                echo 'I win. pat myself on the back!';
-            } else { 
-                echo "UNDECIDED. You're all losers get out";
+        if (!isset($_GET['board'])) {
+            echo "Tic-Tac-Toe-asaurus <br>";
+            $squares = "---------";
+        } else {
+            $squares = $_GET['board'];
+        }
+
+        // put your code here
+        $game = new Game($squares);
+        if ($game->winner('x')) {
+            echo 'Computer wins ohhhhh noes';
+        } else if ($game->winner('o')) {
+            echo 'I win. clap clap clap';
+        } else {
+            $game->next();
+            echo 'Whats a winner.';
+        }
+        $game->display();
+        echo "<br> <a href='?'>New Game</a> <br>";
+
+        
+        //Java TTT class
+        class Game {
+            var $position;
+
+            function __construct($squares) {
+                $this->position = str_split($squares);
             }
-            
-            class Game{
-                var $position;
-                
-                function __construct($squares) {
-                    $this->position = str_split($squares);
-                }
-                
-                function winner($token) {
+
+            function winner($token) {
                 $won = false;
-                if (($this->position[0] == $token) && 
+                if (($this->position[0] == $token) &&
                         ($this->position[1] == $token) &&
                         ($this->position[2] == $token)) {
-                        $won = true;
-                        } else if (($this->position[3] == $token) &&
+                    $won = true;
+                } else if (($this->position[3] == $token) &&
                         ($this->position[4] == $token) &&
                         ($this->position[5] == $token)) {
-                            $won = true;
-                        } else if (($this->position[6] == $token) &&
+                    $won = true;
+                } else if (($this->position[6] == $token) &&
                         ($this->position[7] == $token) &&
                         ($this->position[8] == $token)) {
-                            $won = true;
-                        } else if (($this->position[0] == $token) &&
+                    $won = true;
+                } else if (($this->position[0] == $token) &&
                         ($this->position[3] == $token) &&
                         ($this->position[6] == $token)) {
-                            $won = true;
-                        } else if (($this->position[1] == $token) &&
+                    $won = true;
+                } else if (($this->position[1] == $token) &&
                         ($this->position[4] == $token) &&
                         ($this->position[7] == $token)) {
-                            $won = true;
-                        } else if (($this->position[2] == $token) &&
+                    $won = true;
+                } else if (($this->position[2] == $token) &&
                         ($this->position[5] == $token) &&
                         ($this->position[8] == $token)) {
-                            $won = true;
-                        } else if (($this->position[0] == $token) &&
+                    $won = true;
+                } else if (($this->position[0] == $token) &&
                         ($this->position[4] == $token) &&
                         ($this->position[8] == $token)) {
-                            $won = true;
-                        } else if (($this->position[2] == $token) &&
+                    $won = true;
+                } else if (($this->position[2] == $token) &&
                         ($this->position[4] == $token) &&
                         ($this->position[6] == $token)) {
-                            $won = true;
-                        }
-                    return $won;
+                    $won = true;
+                }
+                return $won;
+            }
+
+            function display() {
+                echo '<table cols="3" style="font-size:large; font-weight:bold">';
+                echo '<tr>'; 
+                for ($pos = 0; $pos < 9; $pos++) {
+                    echo $this->show($pos);
+                    if ($pos % 3 == 2) {
+                        echo '</tr><tr>';
                     }
                 }
+                echo '</tr>'; //close the last row
+                echo '</table>';
+            }
 
+            function show($which) {
+                $token = $this->position[$which];
+                if ($token <> '-') {
+                    return '<td>' . $token . '</td>';
+                }
+                $this->newposition = $this->position;
+                $this->newposition[$which] = 'x';
+                $move = implode($this->newposition);
+                $link = '?board=' . $move;
+                return '<td><a href=' . $link . '>-</a></td>';
+            }
+
+            function next() {
+                $fill = false;
+                do {
+                    $next = rand(0, 8);
+                    if ($this->position[$next] == '-') {
+                        $this->position[$next] = 'o';
+                        $fill = true;
+                    }
+                } while (!$fill);
+            }
+        }
         ?>
 
     </body>
