@@ -126,13 +126,32 @@ and open the template in the editor.
             } else if (($squares[3] == 'x') && ($squares[4] == 'x') && ($squares[6] == 'x')
             {
                 $wewon = true;
-            }
+            }x--xoox--
             ))))))));
             */
         ?>
         
         <?php
         //game status
+        //horizontal check
+            for($row=0; $row<3; $row++){
+                if(($position[3*$row] == $token) && 
+                        ($position[3*$row+1] == $token) &&
+                        ($position[3*$row+2] == $token)){
+                            $won = true;
+                        }
+            }
+            
+            for($row=0; $row<3; $row++){
+                $result = true;
+                for($col=0; $col<3; $col++){
+                    if($position[3*$row+$col] != $token){
+                        $result = false;
+                    }
+                }
+            }
+            
+        //announces state of the game
             if (winner('x', $squares)) {echo 'Computer wins.';}
             else if (winner('o', $squares)) {echo 'I win.';}
             else {echo 'No winner yet.';}
