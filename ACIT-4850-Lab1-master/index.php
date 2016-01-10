@@ -33,7 +33,7 @@ and open the template in the editor.
             echo ($total > 0) ? 'You owe me $' .$total : "you're welcome";
             */
         
-            $position = $_GET['board'];
+            /*$position = $_GET['board'];
             $squares = str_split($position);
             
             function winner($token,$position) {
@@ -73,6 +73,8 @@ and open the template in the editor.
                         }
                     return $won;
             }
+             */
+        
             /*$theywon = false;
             if(($squares[0] == 'x') && ($squares[1] == 'x') && ($squares[2] == 'x')
             {
@@ -131,7 +133,7 @@ and open the template in the editor.
             */
         ?>
         
-        <?php
+        <?php/*
         //game status
         //horizontal check
             for($row=0; $row<3; $row++){
@@ -154,8 +156,67 @@ and open the template in the editor.
         //announces state of the game
             if (winner('x', $squares)) {echo 'Computer wins.';}
             else if (winner('o', $squares)) {echo 'I win.';}
-            else {echo 'No winner yet.';}
+            else {echo 'No winner yet.';}*/
         ?>
         
+        <?php
+            //Java TTT
+            $game = new Game($squares);
+            if($game->winner('x')){
+                echo 'Computer wins aahahhahahaha';
+            } else if ($game->winner('o')){
+                echo 'I win. pat myself on the back!';
+            } else { 
+                echo "UNDECIDED. You're all losers get out";
+            }
+            
+            class Game{
+                var $position;
+                
+                function __construct($squares) {
+                    $this->position = str_split($squares);
+                }
+                
+                function winner($token) {
+                $won = false;
+                if (($this->position[0] == $token) && 
+                        ($this->position[1] == $token) &&
+                        ($this->position[2] == $token)) {
+                        $won = true;
+                        } else if (($this->position[3] == $token) &&
+                        ($this->position[4] == $token) &&
+                        ($this->position[5] == $token)) {
+                            $won = true;
+                        } else if (($this->position[6] == $token) &&
+                        ($this->position[7] == $token) &&
+                        ($this->position[8] == $token)) {
+                            $won = true;
+                        } else if (($this->position[0] == $token) &&
+                        ($this->position[3] == $token) &&
+                        ($this->position[6] == $token)) {
+                            $won = true;
+                        } else if (($this->position[1] == $token) &&
+                        ($this->position[4] == $token) &&
+                        ($this->position[7] == $token)) {
+                            $won = true;
+                        } else if (($this->position[2] == $token) &&
+                        ($this->position[5] == $token) &&
+                        ($this->position[8] == $token)) {
+                            $won = true;
+                        } else if (($this->position[0] == $token) &&
+                        ($this->position[4] == $token) &&
+                        ($this->position[8] == $token)) {
+                            $won = true;
+                        } else if (($this->position[2] == $token) &&
+                        ($this->position[4] == $token) &&
+                        ($this->position[6] == $token)) {
+                            $won = true;
+                        }
+                    return $won;
+                    }
+                }
+
+        ?>
+
     </body>
 </html>
